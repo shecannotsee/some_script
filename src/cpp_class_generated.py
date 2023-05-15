@@ -35,7 +35,7 @@ code += "  "+class_name+"();\n"
 code += " private:\n"
 code += "  // data\n"
 code += " public:\n"
-code += "  //interface\n"
+code += "  // interface\n"
 code += "\n"
 code += "};"
 
