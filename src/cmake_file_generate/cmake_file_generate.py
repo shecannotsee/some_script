@@ -121,7 +121,7 @@ def config_generate():
           ''')
   code += "\n"
 
-  code += "#" * 120
+  code += "#" * 120 + "\n"
   # install
   code += textwrap.dedent('''
           # local debug
