@@ -151,6 +151,9 @@ def config_generate():
                       )
           ''')
 
+  code += "#" * 120 + "\n"
+  code += "# END\n"
+
 
   # 打印获取到的值
   print(code)
