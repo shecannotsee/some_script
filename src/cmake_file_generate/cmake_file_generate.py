@@ -137,7 +137,6 @@ def config_generate():
                   ${test_name} DESTINATION ${PROJECT_NAME}/bin
                   )
           
-          
           if (library STREQUAL "ON")
               # include install
               install(FILES
