@@ -149,6 +149,7 @@ def config_generate():
                       ${library_static_name} ${library_dynamic_name}
                       DESTINATION ${PROJECT_NAME}/include
                       )
+          endif ()
           ''')
 
   code += "#" * 120 + "\n"
