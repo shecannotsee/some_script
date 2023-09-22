@@ -33,7 +33,7 @@ code += "    # Rename the generated dynamic library" + LF
 code += "    set_target_properties(${library_dynamic_name} PROPERTIES OUTPUT_NAME ${project_name})" + LF
 code += ""
 code += "else()" + LF
-code += "    message(STATUS \"CMakeLists.txt error:target error\")" + LF
+code += "    message(STATUS \"CMakeLists.txt error:src build error\")" + LF
 code += "endif ()" + LF
 code += LF
 
