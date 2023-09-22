@@ -8,8 +8,9 @@ code = textwrap.dedent('''
 ########################################################################################################################
 # src build                                                                                                            #
 ########################################################################################################################
+
 # source src
-file(GLOB_RECURSE SRC \"${CMAKE_SOURCE_DIR}/src/*\")
+file(GLOB_RECURSE SRC "${CMAKE_SOURCE_DIR}/src/*")
 # Exclude specific files
 # list(REMOVE_ITEM SRC "${CMAKE_SOURCE_DIR}/src/base64.cpp")
 

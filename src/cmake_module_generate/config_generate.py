@@ -8,8 +8,9 @@ code = textwrap.dedent(f'''
 ########################################################################################################################
 # Global Settings                                                                                                      #
 ########################################################################################################################
+
 # project name
-set(project_name "project_name")
+set(project_name "placeholder_name")
 # [Release] or [Debug] or [MinSizeRel]
 set(compilation_options "Debug")
 

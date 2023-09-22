@@ -11,7 +11,7 @@ code = textwrap.dedent('''
 
 file(GLOB_RECURSE TEST_SRC "${CMAKE_SOURCE_DIR}/test/*")
 # Exclude specific files
-# list(REMOVE_ITEM TEST_SRC "${CMAKE_SOURCE_DIR}/test/base64.cpp")
+# list(REMOVE_ITEM TEST_SRC "${CMAKE_SOURCE_DIR}/test/base.cpp")
 
 # test dependency
 set(test_dependency "-pthread"
