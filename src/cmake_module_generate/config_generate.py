@@ -20,12 +20,15 @@ code += LF
 code += "# src target" + LF
 code += "set(library_static_name \"${project_name}_static\")" + LF
 code += "set(library_dynamic_name \"${project_name}_dynamic\")" + LF
+code += "set(generate_lib ON)" + LF
 code += LF
 code += "# test target" + LF
 code += "set(test_name \"${project_name}_test\")" + LF
+code += "set(generate_test ON)" + LF
 code += LF
 code += "# exec target" + LF
-code += "set(test_name \"${project_name}_exec\")" + LF
+code += "set(exec_name \"${project_name}_exec\")" + LF
+code += "set(generate_exec ON)" + LF
 code += LF
 
 print(code)
