@@ -7,6 +7,7 @@ show1 = textwrap.dedent('''
 1.simple cmake
 2.default cmake,one CMakeLists.txt(include lib,test,exec)
 3.modular organization
+4.common cmake files generate
 ''')
 
 # 获取命令行参数
@@ -123,6 +124,10 @@ elif generate_method == "3":
     write_file(install_path, "z_install.cmake", z_install_context)
 
     print("generate success.")
+elif generate_method == "4":
+    command = ["python3", "./common_cmake_file_generate/cmake_file_generate.py"]
+    common_make = subprocess.check_output(command, universal_newlines=True, stderr=subprocess.STDOUT)
+    print(common_make)
 else:
     print("??????")
     exit(1)
