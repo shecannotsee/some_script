@@ -4,16 +4,10 @@ import textwrap
 # 获取命令行参数
 # class_name = sys.argv[1] if len(sys.argv) > 1 else input("input class name：")
 
-LF = "\n"
-code = ""
-code += "############################################################################################################" \
-        "############" + LF
-code += "# src build                                                                                                 " \
-        "           #" + LF
-code += "############################################################################################################" \
-        "############" + LF
-
-code += textwrap.dedent('''
+code = textwrap.dedent('''
+########################################################################################################################
+# src build                                                                                                            #
+########################################################################################################################
 # source src
 file(GLOB_RECURSE SRC \"${CMAKE_SOURCE_DIR}/src/*\")
 # Exclude specific files
@@ -34,7 +28,7 @@ if (generate_lib STREQUAL "ON")
 else()
     message(STATUS "CMakeLists.txt error:src build error")
 endif ()
+
 ''')
-code += LF
 
 print(code)

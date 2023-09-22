@@ -25,7 +25,7 @@ if (generate_test STREQUAL "ON")
 else()
     message(STATUS "CMakeLists.txt error:test target build error")
 endif ()
+
 ''')
-code += "\n"
 
 print(code)

@@ -3,9 +3,7 @@ import sys
 # 获取命令行参数
 module_name = sys.argv[1] if len(sys.argv) > 1 else input("请输入执行模块名称：")
 
-LF = "\n"
-code = ""
-code += (f"""
+code = (f"""
 ############################################################################################################
 # {module_name} target build
 ############################################################################################################
@@ -25,7 +23,7 @@ if (generate_{module_name} STREQUAL "ON")
 else()
     message(STATUS "CMakeLists.txt error: {module_name} target build error")
 endif ()
+
 """)
-code += LF
 
 print(code)
