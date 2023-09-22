@@ -18,7 +18,7 @@ code += ""
 code += "# debug symbol" + LF
 code += "set(CMAKE_CXX_FLAGS \"-g\")" + LF
 code += LF
-code += "# target" + LF
+code += "# target type" + LF
 code += "set(CMAKE_BUILD_TYPE ${compilation_options})" + LF
 code += LF
 
