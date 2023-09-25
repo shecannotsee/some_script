@@ -15,9 +15,9 @@ set(project_name "placeholder_name")
 set(compilation_options "Debug")
 
 # src target
-set(library_static_name "${{project_name}}_static")"
-set(library_dynamic_name "${{project_name}}_dynamic")"
-set(generate_lib ON)"
+set(library_static_name "${{project_name}}_static")
+set(library_dynamic_name "${{project_name}}_dynamic")
+set(generate_lib ON)
 
 # test target
 set(test_name "${{project_name}}_test")
