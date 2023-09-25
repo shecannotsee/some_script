@@ -12,7 +12,7 @@ code = textwrap.dedent(f'''
 # include
 include_directories(${{CMAKE_SOURCE_DIR}}/third_party/googletest-install/include)
 
-"# lib
+# lib
 link_directories(${{CMAKE_SOURCE_DIR}}/third_party/googletest-install/lib)
 
 # Internal project
