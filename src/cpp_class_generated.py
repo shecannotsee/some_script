@@ -1,3 +1,7 @@
+import sys
+import textwrap
+
+
 # 拷贝和移动参考
 # class vector {
 # private:
@@ -14,32 +18,41 @@
 # public:
 # // ......
 # };
-import sys
+def class_generate():
+    # 获取命令行参数
+    class_name = sys.argv[1] if len(sys.argv) > 1 else input("input class name：")
+    code = textwrap.dedent(f'''
+class {class_name} {{
+ public:
+  // copy:off
+  {class_name}(const {class_name}&) = delete;
+  {class_name}& operator=(const {class_name}&) = delete;
+  // move:off
+  {class_name}({class_name}&&) = delete;
+  {class_name}& operator=({class_name}&&) = delete;
+  // destructors
+  ~{class_name}() = default;
+  // constructors
+  {class_name}() = default;
 
-# 获取命令行参数
-class_name = sys.argv[1] if len(sys.argv) > 1 else input("input class name：")
+ private:
+  // data
+ public:
+  // interface
 
-code = ""
-code += "class "+ class_name + " {\n"
-code += " public:\n"
-code += "  // copy:off\n"
-code += "  "+class_name+"(const "+class_name+"&) = delete;\n"
-code += "  "+class_name+"& operator=(const "+class_name+"&) = delete;\n"
-code += "  // move:off\n"
-code += "  "+class_name+"("+class_name+"&&) = delete;\n"
-code += "  "+class_name+"& operator=("+class_name+"&&) = delete;\n"
-code += "  // destructors\n"
-code += "  ~"+class_name+"() = default;\n"
-code += "  // constructors\n"
-code += "  "+class_name+"() = default;\n\n"
-code += " private:\n"
-code += "  // data\n"
-code += " public:\n"
-code += "  // interface\n"
-code += "\n"
-code += "};"
+}};
+    ''')
+    print(code)
+# def class_generate():
 
-print(code)
+
+def main():
+    class_generate()
+# def main():
+
+
+if __name__ == "__main__":
+    main()
 
 
 
