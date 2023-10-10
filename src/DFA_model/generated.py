@@ -7,17 +7,26 @@ def read_ini_file():
     # 读取INI文件
     config.read('DFA_model.ini')
     return config
+
+
 # def class_generate():
 
 
 class five_tuple:
-    def __init__(self, states, alphabet, alphabet_value, function, start_state, accept_state):
+    def __init__(self, states, alphabet, alphabet_value, function_S, function_Q, function_S_END, start_state,
+                 accept_state):
         self.states = states
         self.alphabet = alphabet
         self.alphabet_value = alphabet_value
-        self.function = function
+        self.function_S = function_S
+        self.function_Q = function_Q
+        self.function_S_END = function_S_END
         self.start_state = start_state
         self.accept_state = accept_state
+    # def __init__( ......
+
+
+# class five_tuple:
 
 
 def get_data(config):
@@ -46,7 +55,9 @@ def get_data(config):
         all_alphabet_value.append(value)
 
     # 3.function #######################################################################################################
-    print("\n3.function")
+    all_S = []
+    all_Q = []
+    all_S_END = []
     function = "function"
     function_sum = (state_num - 1) * alphabet_num
     for i in range(function_sum):
@@ -54,7 +65,9 @@ def get_data(config):
         S = config.get(function_section, 'S')
         Q = config.get(function_section, 'Q')
         S_END = config.get(function_section, 'S_END')
-        print(S, "+", Q, "->" + S_END)
+        all_S.append(S)
+        all_Q.append(Q)
+        all_S_END.append(S_END)
 
     # 4.start_state ####################################################################################################
     start_state = "start_state"
@@ -64,13 +77,28 @@ def get_data(config):
     accept_state = "accept_state"
     accept_state = config.get(accept_state, accept_state)
 
-    my_instance = five_tuple(all_states, all_alphabet, all_alphabet_value, function,start_state, accept_state)
+    # ret ##############################################################################################################
+    result = five_tuple(all_states,
+                        all_alphabet, all_alphabet_value,
+                        all_S, all_Q, all_S_END,
+                        start_state,
+                        accept_state)
+    # return ##########################################################################################################
+    return result
 # def get_data(config):
 
 
 def main():
     config = read_ini_file()
-    get_data(config)
+    info = get_data(config)
+    print(info.states)
+    print(info.alphabet)
+    print(info.alphabet_value)
+    print(info.function_S)
+    print(info.function_Q)
+    print(info.function_S_END)
+    print(info.start_state)
+    print(info.accept_state)
 # def main():
 
 
