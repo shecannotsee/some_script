@@ -10,9 +10,19 @@ def read_ini_file():
 # def class_generate():
 
 
+class five_tuple:
+    def __init__(self, states, alphabet, alphabet_value, function, start_state, accept_state):
+        self.states = states
+        self.alphabet = alphabet
+        self.alphabet_value = alphabet_value
+        self.function = function
+        self.start_state = start_state
+        self.accept_state = accept_state
+
+
 def get_data(config):
     # 1.states #########################################################################################################
-    print("\n1.states")
+    all_states = []
     state_num = 0
     states = "states"
     keys = config.options(states)
@@ -20,10 +30,11 @@ def get_data(config):
     for key in keys:
         state_num = state_num + 1
         value = config.get(states, key)
-        print(f"{key} = {value}")
+        all_states.append(key)
 
     # 2.alphabet #######################################################################################################
-    print("\n2.alphabet")
+    all_alphabet = []
+    all_alphabet_value = []
     alphabet_num = 0
     alphabet = "alphabet"
     keys = config.options(alphabet)
@@ -31,7 +42,8 @@ def get_data(config):
     for key in keys:
         alphabet_num = alphabet_num + 1
         value = config.get(alphabet, key)
-        print(f"{key} = {value}")
+        all_alphabet.append(key)
+        all_alphabet_value.append(value)
 
     # 3.function #######################################################################################################
     print("\n3.function")
@@ -45,15 +57,14 @@ def get_data(config):
         print(S, "+", Q, "->" + S_END)
 
     # 4.start_state ####################################################################################################
-    print("\n4.start_state")
     start_state = "start_state"
     start_state = config.get(start_state, start_state)
-    print(start_state)
+
     # 5.accept_state ###################################################################################################
-    print("\n5.accept_state")
     accept_state = "accept_state"
     accept_state = config.get(accept_state, accept_state)
-    print(accept_state)
+
+    my_instance = five_tuple(all_states, all_alphabet, all_alphabet_value, function,start_state, accept_state)
 # def get_data(config):
 
 
