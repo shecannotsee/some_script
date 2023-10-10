@@ -4,32 +4,74 @@ import configparser
 def read_ini_file():
     # 创建ConfigParser对象
     config = configparser.ConfigParser()
-
     # 读取INI文件
-    config.read('example.ini')
+    config.read('DFA_model.ini')
+    return config
 
-    # 获取值
-    value1 = config.get('Section1', 'key1')
-    value2 = config.get('Section1', 'key2')
-    value3 = config.get('Section2', 'key3')
-    value4 = config.get('Section2', 'key4')
+    # 获取Section1下的所有键
+    section_name = 'states'
+    keys = config.options(section_name)
 
-    # 打印值
-    print(f"Section1 key1: {value1}")
-    print(f"Section1 key2: {value2}")
-    print(f"Section2 key3: {value3}")
-    print(f"Section2 key4: {value4}")
+    # 遍历并打印键和对应的值
+    for key in keys:
+        value = config.get(section_name, key)
+        print(f"{key} = {value}")
+
+
 # def class_generate():
+def get_data(config):
+    # 1.states #########################################################################################################
+    print("\n1.states")
+    state_num = 0
+    states = "states"
+    keys = config.options(states)
+    # 遍历并打印键和对应的值
+    for key in keys:
+        state_num = state_num + 1
+        value = config.get(states, key)
+        print(f"{key} = {value}")
 
+    # 2.alphabet #######################################################################################################
+    print("\n2.alphabet")
+    alphabet_num = 0
+    alphabet = "alphabet"
+    keys = config.options(alphabet)
+    # 遍历并打印键和对应的值
+    for key in keys:
+        alphabet_num = alphabet_num + 1
+        value = config.get(alphabet, key)
+        print(f"{key} = {value}")
+
+    # 3.function #######################################################################################################
+    print("\n3.function")
+    function = "function"
+    function_sum = (state_num - 1) * alphabet_num
+    for i in range(function_sum):
+        function_section = function + str(i+1)
+        print(function_section)
+        S = config.get(function_section, 'S')
+        Q = config.get(function_section, 'Q')
+        S_END = config.get(function_section, 'S_END')
+        print(S, "+", Q, "->" + S_END)
+
+    # 4.start_state ####################################################################################################
+    print("\n4.start_state")
+    start_state = "start_state"
+    start_state = config.get(start_state, start_state)
+    print(start_state)
+    # 5.accept_state ###################################################################################################
+    print("\n5.accept_state")
+    accept_state = "accept_state"
+    accept_state = config.get(accept_state, accept_state)
+    print(accept_state)
+
+# def get_data(config):
 
 def main():
-
-    read_ini_file()
+    config = read_ini_file()
+    get_data(config)
 # def main():
 
 
 if __name__ == "__main__":
     main()
-
-
-
