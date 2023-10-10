@@ -7,18 +7,9 @@ def read_ini_file():
     # 读取INI文件
     config.read('DFA_model.ini')
     return config
-
-    # 获取Section1下的所有键
-    section_name = 'states'
-    keys = config.options(section_name)
-
-    # 遍历并打印键和对应的值
-    for key in keys:
-        value = config.get(section_name, key)
-        print(f"{key} = {value}")
-
-
 # def class_generate():
+
+
 def get_data(config):
     # 1.states #########################################################################################################
     print("\n1.states")
@@ -47,8 +38,7 @@ def get_data(config):
     function = "function"
     function_sum = (state_num - 1) * alphabet_num
     for i in range(function_sum):
-        function_section = function + str(i+1)
-        print(function_section)
+        function_section = function + str(i + 1)
         S = config.get(function_section, 'S')
         Q = config.get(function_section, 'Q')
         S_END = config.get(function_section, 'S_END')
@@ -64,8 +54,8 @@ def get_data(config):
     accept_state = "accept_state"
     accept_state = config.get(accept_state, accept_state)
     print(accept_state)
-
 # def get_data(config):
+
 
 def main():
     config = read_ini_file()
