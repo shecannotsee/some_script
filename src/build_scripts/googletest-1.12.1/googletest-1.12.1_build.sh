@@ -1,10 +1,10 @@
 #!/bin/bash
-project="she_ini_plus"
+project="she_ini_parse"
+project_length=${#project}
 # Get pwd string
 path=$(pwd)
-# Get last 12 chars
-suffix="${path: -12}"
-# Check if it is "she_ini_plus"
+# Get last project_length chars
+suffix="${path: -$project_length}"
 if [ "$suffix" = "$project" ]; then
     echo "ok"
 else
