@@ -11,6 +11,11 @@ code = textwrap.dedent(f'''
 
 # project name
 set(project_name "placeholder_name")
+PROJECT(${{project_name}}
+        VERSION      0.0.1
+        LANGUAGES    CXX
+        )
+
 # [Release] or [Debug] or [MinSizeRel]
 set(compilation_options "Debug")
 
