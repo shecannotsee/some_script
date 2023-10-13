@@ -4,10 +4,7 @@ import textwrap
 # 获取命令行参数
 # module_name = sys.argv[1] if len(sys.argv) > 1 else input("Additional modules name(default exec)：")
 
-code = textwrap.dedent('''
-//
-// Created by shecannotsee on 23-10-10.
-//
+code = textwrap.dedent('''// Created by shecannotsee on
 #include <iostream>
 #include "global_test_set.h"
 #include "test_example.h"
@@ -34,7 +31,6 @@ int main() {
   }
 
   return 0;
-}
-''')
+}''')
 
 print(code)

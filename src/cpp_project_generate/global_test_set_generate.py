@@ -4,9 +4,7 @@ import textwrap
 # 获取命令行参数
 # module_name = sys.argv[1] if len(sys.argv) > 1 else input("Additional modules name(default exec)：")
 
-code = textwrap.dedent('''
-
-#ifndef GLOBAL_TEST_SET_H
+code = textwrap.dedent('''#ifndef GLOBAL_TEST_SET_H
 #define GLOBAL_TEST_SET_H
 
 #include <string>
@@ -20,8 +18,6 @@ const std::string YELLOW_COLOR  = "\033[33m";
 const std::string PURPLE_COLOR  = "\033[35m";
 const std::string BLUE_COLOR    = "\033[34m";
 
-#endif // GLOBAL_TEST_SET_H
-
-''')
+#endif // GLOBAL_TEST_SET_H''')
 
 print(code)
