@@ -10,10 +10,10 @@ code = textwrap.dedent(f'''
 ########################################################################################################################
 
 # include
-include_directories(${{CMAKE_SOURCE_DIR}}/third_party/googletest-install/include)
+include_directories(${{CMAKE_SOURCE_DIR}}/third_party/googletest/include)
 
 # lib
-link_directories(${{CMAKE_SOURCE_DIR}}/third_party/googletest-install/lib)
+link_directories(${{CMAKE_SOURCE_DIR}}/third_party/googletest/lib)
 
 # Internal project
 include_directories(${{CMAKE_SOURCE_DIR}}/src)
