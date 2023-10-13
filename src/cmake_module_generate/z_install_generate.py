@@ -22,7 +22,7 @@ install(TARGETS
     ${test_name} DESTINATION ${PROJECT_NAME}/bin
     )
           
-if (generate_lib "ON")
+if (generate_lib STREQUAL "ON")
     # include install
     install(FILES
         ${CMAKE_SOURCE_DIR}/src/base64.h # source head

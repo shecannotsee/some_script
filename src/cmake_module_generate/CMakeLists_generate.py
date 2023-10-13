@@ -12,7 +12,7 @@ cmake_minimum_required(VERSION 3.11)
 ########################################################################################################################
 
 set(project_name "placeholder_name")
-PROJECT(${{project_name}}
+PROJECT(${project_name}
         VERSION      0.0.1
         LANGUAGES    CXX
         )
@@ -20,8 +20,8 @@ PROJECT(${{project_name}}
 # [Release] or [Debug] or [MinSizeRel]
 set(compilation_options "Debug")
 
-set(library_static_name "${{project_name}}_static")
-set(library_dynamic_name "${{project_name}}_dynamic")
+set(library_static_name "${project_name}_static")
+set(library_dynamic_name "${project_name}_dynamic")
 
 ########################################################################################################################
 # include                                                                                                              #
