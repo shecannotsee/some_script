@@ -34,6 +34,11 @@ if (generate_lib "ON")
         ${library_static_name} ${library_dynamic_name}
         DESTINATION ${PROJECT_NAME}/include
         )
+    # cmake install
+    install(FILES
+            ${CMAKE_SOURCE_DIR}/cmake/${project_name}-config.cmake
+            DESTINATION ${PROJECT_NAME}/cmake
+            )
 endif ()
 
 ''')
