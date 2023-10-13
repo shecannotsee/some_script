@@ -14,6 +14,7 @@ show1 = textwrap.dedent('''
 print(show1)
 generate_method = sys.argv[1] if len(sys.argv) > 1 else input("Please select:")
 
+
 def write_file(path, file_name, context):
     file_path_ = os.path.join(path, file_name)
     with open(file_path_, "w") as file_:
@@ -122,6 +123,12 @@ elif generate_method == "3":
     command = ["python3", "z_install_generate.py"]
     z_install_context = subprocess.check_output(command, universal_newlines=True, stderr=subprocess.STDOUT)
     write_file(install_path, "z_install.cmake", z_install_context)
+
+    # z_install_generate
+    project_name = input("Additional project name：")
+    command = ["python3", "project_config_cmake_generate.py", project_name]
+    cmake = subprocess.check_output(command, universal_newlines=True, stderr=subprocess.STDOUT)
+    write_file(install_path, project_name + "-config.cmake", cmake)
 
     print("generate success.")
 elif generate_method == "4":
