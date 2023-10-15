@@ -97,6 +97,7 @@ def generate_cpp_code(data):
 #define DFA_MODEL_H
 
 #include <unordered_map>
+#include <provide_hash.h>
 
 namespace DFA_model {
         ''')
@@ -191,6 +192,29 @@ states transition_status(states now, char_type input) {{
         # END ##########################################################################################################
         cpp_code_file.write("}// namespace DFA_model\n\n")
         cpp_code_file.write("#endif //DFA_MODEL_H\n")
+
+    with open("provide_hash.h", "w") as hash_code:
+        content = textwrap.dedent('''#ifndef PROVIDE_HASH_H
+#define PROVIDE_HASH_H
+
+#include <tuple>
+
+// Provide custom hashes to <>
+namespace std {
+template<>
+struct hash<std::tuple<int, int>> {
+  std::size_t operator()(const std::tuple<int, int> &key) const {
+    using std::hash;
+    // Combine the hash values of the two enum values to create a unique hash
+    return hash<int>()(static_cast<int>(std::get<0>(key))) ^ hash<int>()(static_cast<int>(std::get<1>(key)));
+  }
+};
+}// namespace std
+
+#endif //PROVIDE_HASH_H
+        ''')
+        hash_code.write(content)
+
 
 
 # def generate_cpp_code(data):
