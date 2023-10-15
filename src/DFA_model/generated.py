@@ -8,6 +8,8 @@ def read_ini_file():
     # 读取INI文件
     config.read('DFA_model.ini')
     return config
+
+
 # def class_generate():
 
 
@@ -23,6 +25,8 @@ class five_tuples:
         self.start_state = start_state
         self.accept_state = accept_state
     # def __init__( ......
+
+
 # class five_tuple:
 
 
@@ -76,12 +80,14 @@ def get_data(config):
 
     # ret ##############################################################################################################
     result = five_tuples(all_states,
-                        all_alphabet, all_alphabet_value,
-                        all_S, all_Q, all_S_END,
-                        start_state,
-                        accept_state)
+                         all_alphabet, all_alphabet_value,
+                         all_S, all_Q, all_S_END,
+                         start_state,
+                         accept_state)
     # return ##########################################################################################################
     return result
+
+
 # def get_data(config):
 
 
@@ -99,26 +105,43 @@ namespace DFA_model {
         state_str = "  "
         for state in data.states:
             state_str += state
-            state_str += ", "
+            state_str += ","
         content = textwrap.dedent(f'''
 /********** States ****************************************************************************************************/
 enum class states : int {{
   {state_str}REFUSE
 }};
-
 ''')
         cpp_code_file.write(content)
 
         # get alphabet #################################################################################################
+        a_state = ""
+        hash_table = ""
         for alphabet, value in zip(data.alphabet, data.alphabet_value):
-            print("Alphabet:", alphabet, "Value:", value)
+            a_state += alphabet
+            a_state += ","
+            hash_table += "  {'" + value + "', alphabet::" + alphabet + "},\n"
         content = textwrap.dedent(f'''
 /********** alphabet **************************************************************************************************/
-enum class states : int {{
-  {state_str}REFUSE
+enum class alphabet : int {{
+  {a_state}
 }};
 
+static std::unordered_map<char, alphabet> cher_table = {{
+{hash_table}
+}};
+
+// convert Character to State
+template<typename char_type>
+alphabet get_alphabet(char_type input) {{
+  if (cher_table.find(input) != cher_table.end()) {{
+    return cher_table[input];
+  }} else {{
+    //
+  }}
+}}
 ''')
+        cpp_code_file.write(content)
 
         # get function #################################################################################################
         for i in range(len(data.function_S)):
@@ -135,6 +158,8 @@ enum class states : int {{
         # END ##########################################################################################################
         cpp_code_file.write("}// namespace DFA_model\n\n")
         cpp_code_file.write("#endif //DFA_MODEL_H\n")
+
+
 # def generate_cpp_code(data):
 
 def main():
@@ -149,6 +174,8 @@ def main():
     # print(info.start_state)
     # print(info.accept_state)
     generate_cpp_code(info)
+
+
 # def main():
 
 
