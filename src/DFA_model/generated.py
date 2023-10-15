@@ -118,6 +118,7 @@ enum class states : int {{
         a_state = ""
         hash_table = ""
         for alphabet, value in zip(data.alphabet, data.alphabet_value):
+            # print("Alphabet:", alphabet, "Value:", value)
             a_state += alphabet
             a_state += ","
             hash_table += "  {'" + value + "', alphabet::" + alphabet + "},\n"
@@ -128,8 +129,7 @@ enum class alphabet : int {{
 }};
 
 static std::unordered_map<char, alphabet> cher_table = {{
-{hash_table}
-}};
+{hash_table}}};
 
 // convert Character to State
 template<typename char_type>
@@ -144,16 +144,49 @@ alphabet get_alphabet(char_type input) {{
         cpp_code_file.write(content)
 
         # get function #################################################################################################
+        function_str = ""
         for i in range(len(data.function_S)):
-            print("Function", i + 1, "S:", data.function_S[i])
-            print("Function", i + 1, "Q:", data.function_Q[i])
-            print("Function", i + 1, "S_END:", data.function_S_END[i])
+            # print("Function", i + 1, "S:", data.function_S[i])
+            # print("Function", i + 1, "Q:", data.function_Q[i])
+            # print("Function", i + 1, "S_END:", data.function_S_END[i])
+            function_str += "  {{static_cast<int>(states::" + data.function_S[i] + \
+                            "),static_cast<int>(alphabet::" + data.function_Q[i] + \
+                            ")},/* -> */states::" + data.function_S_END[i] + "},\n"
+
+        content = textwrap.dedent(f'''
+/********** Transition Function ***************************************************************************************/
+static std::unordered_map<std::tuple<int,int>,states> transfer_function = {{
+{function_str}}};
+
+template<typename char_type>
+states transition_status(states now, char_type input) {{
+  int input_S = static_cast<int>(now);
+  int input_Q = static_cast<int>(get_alphabet(input));
+  auto key = std::make_tuple(input_S,input_Q);
+  if(transfer_function.find(key)!= transfer_function.end())
+    return transfer_function[key];
+  else {{
+    return states::REFUSE;
+  }}
+}}
+''')
+        cpp_code_file.write(content)
 
         # get start state ##############################################################################################
-        print("Start State:", data.start_state)
+        # print("Start State:", data.start_state)
+        content = textwrap.dedent('''
+/********** init state ************************************************************************************************/
+        ''')
+        content += "constexpr states start_state = states::" + data.start_state + ";\n"
+        cpp_code_file.write(content)
 
         # get end state ################################################################################################
-        print("Accept State:", data.accept_state)
+        # print("Accept State:", data.accept_state)
+        content = textwrap.dedent('''
+/********** accept state **********************************************************************************************/
+        ''')
+        content += "constexpr states accept_state = states::" + data.accept_state + ";\n\n"
+        cpp_code_file.write(content)
 
         # END ##########################################################################################################
         cpp_code_file.write("}// namespace DFA_model\n\n")
