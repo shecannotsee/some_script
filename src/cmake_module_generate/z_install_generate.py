@@ -32,7 +32,7 @@ if (generate_lib STREQUAL "ON")
     # lib install
     install(TARGETS
         ${library_static_name} ${library_dynamic_name}
-        DESTINATION ${PROJECT_NAME}/include
+        DESTINATION ${PROJECT_NAME}/lib
         )
     # cmake install
     install(FILES
