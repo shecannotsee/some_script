@@ -42,7 +42,9 @@ def code_generate():
 
     function_info = parse_c_function(c_function)
     function_name = function_info['function_name']
+    function_name = function_name.strip()
     function_return = function_info['function_return']
+    function_return = function_return.strip()
     function_param = ""
     function_name_list = ""
     for index, (param_type, param_name) in enumerate(function_info['function_params']):
@@ -79,16 +81,17 @@ typedef FILE* (*{function_name}_func_t)({function_param});
 extern "C" {function_return} {function_name}({function_param}) {{
   if (mock_{function_name}) {{
     if ({function_name}_case == {function_name}_case_des::ret_1) {{
-      return {function_return};
+      return {function_return}{{}};
     }} else if ( 1 ) {{
-      return {function_return};
+      return {function_return}{{}};
     }} else {{
-      return {function_return};
+      return {function_return}{{}};
     }}
   }} else {{
     return {function_name}_func({function_name_list});
   }}
 }}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ''')
 
     print(code)
