@@ -95,14 +95,11 @@ extern "C" {function_return} {function_name}({function_param}) {{
     ''')
 
     print(code)
-
 # def class_generate():
 
 
 def main():
     code_generate()
-
-
 # def main():
 
 
