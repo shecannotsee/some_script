@@ -109,7 +109,7 @@ enum class {function_name}_case_des : int {{
 }};
 static {function_name}_case_des {function_name}_case = {function_name}_case_des::ret_1;
 /* {function_name} mock set */
-typedef FILE* (*{function_name}_func_t)({function_param});
+typedef {function_return} (*{function_name}_func_t)({function_param});
 /* The real function address function */
 {function_name}_func_t {function_name}_func = reinterpret_cast<{function_name}_func_t>(dlsym(RTLD_NEXT,"{function_name}"));
 /* {function_name} mock */
