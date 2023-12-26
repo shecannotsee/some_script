@@ -2,44 +2,79 @@ import sys
 import textwrap
 import re
 
-
 # int fclose (FILE *__stream, int b)
-# FILE* fopen(const char *__restrict __filename, const char *__restrict __modes)
+# FILE *fopen (const char *__restrict __filename,
+# const char *__restrict __modes)
+
+# Split strings. like[const char *__restrict __filename] to [const char *__restrict] and [__filename]
+def param_parse(param):
+    # 使用空格分隔字符串，得到单词列表
+    param_list_str = param.split()
+    if len(param_list_str) > 0:
+        param_name = param_list_str[-1]
+        param_type = " ".join(param_list_str[:-1])
+        if param_name[0] == "*":
+            param_type += "*"
+            param_name = param_name[1:]
+        return param_type, param_name
+    else:
+        # 如果字符串为空，返回两个空字符串
+        return "", ""
+# def param_parse(input_string):
+
 def parse_c_function(c_function_string):
-    # Regular expression to extract function information
-    pattern = r'(\w+)\s+([\w\s\*]+)\s*\(([^)]*)\)'
-    match = re.match(pattern, c_function_string)
-
+    # get function return and name info
+    function_return = ""
+    function_name = ""
+    match = re.search(r'[^()]+(?=\()', c_function_string)
     if match:
-        function_return = match.group(1)
-        function_name = match.group(2)
-        param_list = match.group(3).split(',')
-
-        # Extracting parameter types and names
-        param_info = [tuple(param.strip().split()) for param in param_list if param.strip()]
-
-        # process
-        for i in range(len(param_info)):
-            if param_info[i]:
-                param_name, param_type = param_info[i]
-                if param_type[0] == "*":
-                    param_info[i] = (param_name + param_type[0], param_type[1:])
-
-        return {
-            'function_name': function_name,
-            'function_return': function_return,
-            'function_params': param_info
-        }
+        function_return_name = match.group()
+        function_return_name = function_return_name.split()
+        function_return = function_return_name[0]
+        function_name = function_return_name[1]
+        if function_name[0] == "*":
+            function_return += "*"
+            function_name = function_name[1:]
     else:
         print("parse c function error")
         return None
+
+    # get param info
+    param_info_list = []
+    match = re.search(r'\((.*?)\)', c_function_string)
+    if match:
+        # 获取匹配到的括号内的内容
+        param_info = match.group(1).split(',')
+        for param in param_info:
+            param_info_list.append(param_parse(param))
+    else:
+        print("parse c function error")
+        return None
+
+    return {
+        'function_name': function_name,
+        'function_return': function_return,
+        'function_params': param_info_list
+    }
 # def parse_c_function(declaration):
 
+def get_input():
+    c_function = ""
+    input_lines = []
+    print("input function [example int func(int a)]: use enter to end the input")
+    while True:
+        line = input()
+        if not line:  # 如果输入为空（用户按下了 Enter 键）
+            for argv in input_lines:
+                c_function += argv
+            break
+        input_lines.append(line)
+    return c_function
+# def get_input():
 
 def code_generate():
     # 获取命令行参数
-    c_function = sys.argv[1] if len(sys.argv) > 1 else input("input function [example int func(int a)]：")
-
+    c_function = get_input()
     function_info = parse_c_function(c_function)
     function_name = function_info['function_name']
     function_name = function_name.strip()
@@ -95,11 +130,15 @@ extern "C" {function_return} {function_name}({function_param}) {{
     ''')
 
     print(code)
+
+
 # def class_generate():
 
 
 def main():
     code_generate()
+
+
 # def main():
 
 
