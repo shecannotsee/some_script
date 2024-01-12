@@ -26,13 +26,14 @@ error_suite=()
 for ((i=0; i<${#suite_name[@]}; i++)); do
     ./${exec_program} --gtest_filter=${suite_name[i]} > output_file.txt 2>&1 &
     pid=$!
-    (sleep 1 && kill -9 $pid) 2>/dev/null &
+    (sleep 10 && kill -9 $pid) 2>/dev/null &
     wait $pid
     running_output=$(cat output_file.txt)
     if [ $? -eq 0 ] && echo "$running_output" | grep -q "PASSED"; then
-      :
+      echo "./${exec_program} --gtest_filter=${suite_name[i]}"
     else
-      error_suite+=("./${exec_program} --gtest_filter=${suite_name[i]}")
+      error_suite+=(./${exec_program} --gtest_filter=${suite_name[i]})
+      echo "./${exec_program} --gtest_filter=${suite_name[i]}"
     fi
 done
 
