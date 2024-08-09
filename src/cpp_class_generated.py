@@ -18,7 +18,7 @@ import textwrap
 # public:
 # // ......
 # };
-def class_generate():
+def class_generate() -> str:
     # 获取命令行参数
     class_name = sys.argv[1] if len(sys.argv) > 1 else input("input class name：")
     code = textwrap.dedent(f'''
@@ -42,17 +42,15 @@ class {class_name} {{
 
 }};
     ''')
-    print(code)
+    return code
 # def class_generate():
 
 
 def main():
-    class_generate()
+    code: str = class_generate()
+    print(code)
 # def main():
 
 
 if __name__ == "__main__":
     main()
-
-
-
