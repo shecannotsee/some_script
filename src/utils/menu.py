@@ -3,7 +3,9 @@ from option.o1 import class_generate
 from option.o2 import commit_standard
 from option.o3 import cpp_project_generation
 from option.o4 import mock_sys_function
-
+from option.o5 import minimum_cmake_gen
+from option.o6 import simple_cmake_gen
+from option.o7 import modular_organization_cmake_gen
 
 class menu:
     def __init__(self):
@@ -11,7 +13,10 @@ class menu:
             1: ("Class generation in C++", class_generate),
             2: ("Commit standard", commit_standard),
             3: ("C++ project generation", cpp_project_generation),
-            4: ("Mock of system functions", mock_sys_function)
+            4: ("Mock of system functions", mock_sys_function),
+            5: ("Minimum CMake", minimum_cmake_gen),
+            6: ("Simple CMake", simple_cmake_gen),
+            7: ("Modular Organization CMake", modular_organization_cmake_gen)
         }
 
     def show_menu(self):
