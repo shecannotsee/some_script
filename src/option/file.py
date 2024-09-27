@@ -1,4 +1,5 @@
 import os
+from typing import NoReturn
 
 def get_content(*path) -> str:
     file_path: str = os.path.join(*path)
