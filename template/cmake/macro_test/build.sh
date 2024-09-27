@@ -1,0 +1,1 @@
+g++ -DTEST -DVALUE=20 main.cpp -o main
