@@ -1,7 +1,7 @@
 import os
 import shutil
 from typing import NoReturn
-from option.file import get_content, write_file
+from utils.file import get_content, write_file
 
 def cpp_project_generation() -> NoReturn:
     mock_content: str = get_content(

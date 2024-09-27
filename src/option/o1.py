@@ -1,6 +1,6 @@
 import os
 from typing import NoReturn
-from option.file import get_content
+from utils.file import get_content
 
 
 def class_generate() -> NoReturn:

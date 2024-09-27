@@ -2,7 +2,7 @@ import os
 import re
 from typing import NoReturn
 from typing import Tuple, List, Dict, Optional, Union
-from option.file import get_content
+from utils.file import get_content
 
 def param_parse(param: str) -> Tuple[str, str]:
     # 使用空格分隔字符串，得到单词列表

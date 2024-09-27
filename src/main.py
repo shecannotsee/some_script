@@ -1,5 +1,5 @@
 import os
-from menu import menu
+from utils.menu import menu
 
 if __name__ == "__main__":
     current_path: str = "src"
