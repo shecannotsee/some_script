@@ -59,7 +59,7 @@ def modular_organization_cmake_gen() -> NoReturn:
     # Obtain the generation path
     generate_path: str = str()
     while True:
-        generate_path = input("Please enter the generation path: ")
+        generate_path = input("Please enter the generation path:")
         if os.path.isdir(generate_path):
             print(f"The generated directory is: {generate_path}")
             break
@@ -92,8 +92,3 @@ def modular_organization_cmake_gen() -> NoReturn:
     # Generate file: cmake/install.cmake
     file: str = os.path.join(generate_path, "install.cmake")
     write_file(file, install_content)
-
-
-    
-    
-

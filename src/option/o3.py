@@ -1,7 +1,9 @@
 import os
 import shutil
 from typing import NoReturn
+from unittest.mock import patch
 from utils.file import get_content, write_file
+from option.o7 import modular_organization_cmake_gen
 
 def cpp_project_generation() -> NoReturn:
     mock_content: str = get_content(
@@ -39,5 +41,7 @@ def cpp_project_generation() -> NoReturn:
         elif os.path.isdir(item_source_path):
             shutil.copytree(item_source_path, destination_path)  # Recursively copy directory
 
+    with patch('builtins.input', side_effect=[project_path]):
+        modular_organization_cmake_gen()
+
     print(f"C++ project generation success to {project_path}")
-    print("If you want to generate cmake, please refer to: https://github.com/shecannotsee/cmake_template")
