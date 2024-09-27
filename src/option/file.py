@@ -12,3 +12,8 @@ def get_content(*path) -> str:
         exit(1)
     
     return content
+
+def write_file(path: str, content: str) -> NoReturn:
+    with open(path, 'w') as file:
+        file.write(content)
+        file.write("\n")
