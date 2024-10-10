@@ -32,7 +32,7 @@ if __name__ == "__main__":
     # static analysis
     src_dir: str = "./src"
     try:
-        use_clang_tidy(src_dir, "static_analysis_report.log")
+        use_clang_tidy(src_dir, "./report/static_analysis_report.log")
     except Exception as e:
         print(f"static analysis failed: {e}")
         exit(1)
@@ -47,21 +47,21 @@ if __name__ == "__main__":
 
     # dynamic analysis
     try:
-        use_valgrind(build_dir, test_target, "valgrind_report.log")
+        use_valgrind(build_dir, test_target, "./report/valgrind_report.log")
     except Exception as e:
         print(f"dynamic analysis failed: {e}")
         exit(1)
 
     # coverage report
     try:
-        use_gcov(build_dir, "./docs/coverage.info", "./docs/coverage_report")
+        use_gcov(build_dir, "./report/coverage.info", "./report/coverage_rate")
     except Exception as e:
         print(f"coverage report failed: {e}")
         exit(1)
 
     # document generation
     try:
-        use_doxygen("./Doxyfile")
+        use_doxygen("./report/Doxyfile")
     except Exception as e:
         print(f"document generation failed: {e}")
         exit(1)
