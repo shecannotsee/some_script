@@ -24,6 +24,13 @@ if (build_shared_libs STREQUAL ON)
     )
 endif ()
 
+# Install other module
+install(TARGETS
+        ${other_name}
+        DESTINATION
+        ${project_name}/bin
+)
+
 # Install testing module
 if (build_tests STREQUAL ON)
     install(TARGETS
