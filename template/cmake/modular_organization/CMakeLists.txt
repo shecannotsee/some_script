@@ -16,11 +16,17 @@ option(build_shared_libs "enable shared libs" OFF)
 file(GLOB_RECURSE src "${CMAKE_SOURCE_DIR}/src/*")
 set(src_link_dependency)
 
+# Pre setting of target-other
+file(GLOB_RECURSE other_src
+        "${CMAKE_SOURCE_DIR}/other/*"
+)
+set(other_name "${project_name}_other")
+set(other_link_dependency)
+
 # Pre setting of target-test
 if (build_tests STREQUAL ON)
     set(test_name "${project_name}_test")
     set(test_link_dependency)
-    list(APPEND test_link_dependency ${src_link_dependency})
 endif ()
 
 ########################################################################################################################
@@ -29,5 +35,6 @@ endif ()
 include(${CMAKE_SOURCE_DIR}/cmake/build.cmake)
 include(${CMAKE_SOURCE_DIR}/cmake/import_third_party.cmake)
 include(${CMAKE_SOURCE_DIR}/cmake/target_src.cmake)
+include(${CMAKE_SOURCE_DIR}/cmake/target_other.cmake)
 include(${CMAKE_SOURCE_DIR}/cmake/target_test.cmake)
 include(${CMAKE_SOURCE_DIR}/cmake/install.cmake)
