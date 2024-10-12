@@ -40,19 +40,22 @@ $ tree -L 2
 ├── build_3.sh
 ├── build_gtest.sh
 ├── cmake
-│   ├── build.cmake
-│   ├── import_third_party.cmake
-│   ├── install.cmake
-│   ├── target_src.cmake
-│   └── target_test.cmake
+│   ├── build.cmake
+│   ├── import_third_party.cmake
+│   ├── install.cmake
+│   ├── target_src.cmake
+│   ├── target_other.cmake
+│   └── target_test.cmake
 ├── CMakeLists.txt
 ├── googletest-1.12.0
-│   ├── include
-│   └── lib
+│   ├── include
+│   └── lib
 ├── README_CN.md
 ├── src
-│   ├── cal.cpp
-│   └── cal.h
+│   ├── cal.cpp
+│   └── cal.h
+├── other
+│   └── main.cpp
 └── test
     ├── cal.cpp
     └── main.cpp
@@ -105,25 +108,33 @@ $
 
 
 
-#### (4)target_test.cmake
+#### (4)target_other.cmake
 
-该文件主要处理  test 中的 target 生成, 也可以作为其他 target 构建的样例。
+该文件主要是示例, 用来表示如何在项目中添加一个新的 target, 并且该 target 是一个可以执行的模块。与之相关联的代码可以参考本文件、CMakeLists.txt、(5)target_test.cmake 以及 install.cmake。
+
+自定义以及添加的内容: 根据用户需要可以进行自定义修改, 通常根据添加的 target 文件, 需要在 CMakeLists.txt、本文件、(5)target_test.cmake 以及 install.cmake 文件中添加相应的内容。
+
+
+
+#### (5)target_test.cmake
+
+该文件主要处理  test 中的 target 生成, 也可以作为其他 target 构建的样例。需要注意的是, 如果其他模块中使用了 main 入口, 需要在 test 模块中对 main 文件进行剔除。
 
 自定义以及添加的内容: 该文件通常无需变动或者更改。
 
 
 
-#### (5)install.cmake
+#### (6)install.cmake
 
 该文件主要处理构建项目后的安装问题。首先是默认安装 src 的所有内容, 然后根据选项选择性的安装动态库以及测试模块。
 
-自定义以及添加的内容: 根据额外添加的 target 可以参考 target test 的代码样例进行安装。
+自定义以及添加的内容: 额外添加的 target 可以参考 target other 的代码样例进行安装。
 
 
 
 #### (6)自定义文件
 
-对于额外添加的名为 sample 的 target , sample需要先在 CMakeLists.txt 中参考 target-test 添加全局信息, 然后在 include 中添加名为 target_sample.cmake 的 cmake 文件。然后在 cmake/import_third_party.cmake 中对 sample 添加相应的依赖。然后在 target_sample.cmake 中处理构建目录以及构建目标。最后在 cmake/install.cmake 中添加相应的安装方式。
+参考 (4)target_other.cmake。对于额外添加的名为 sample 的 target , sample需要先在 CMakeLists.txt 中参考 target-other 添加全局信息, 然后在 include 中添加名为 target_sample.cmake 的 cmake 文件。然后在 cmake/import_third_party.cmake 中对 sample 添加相应的依赖。然后在 target_sample.cmake 中处理构建目录以及构建目标。最后在 cmake/install.cmake 中添加相应的安装方式。
 
 
 

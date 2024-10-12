@@ -1,6 +1,6 @@
 # modular_organization
 
-## I. Overall Concept
+## I. General Concept
 
 #### Code and Output
 
@@ -38,6 +38,7 @@ $ tree -L 2
 │   ├── import_third_party.cmake
 │   ├── install.cmake
 │   ├── target_src.cmake
+│   ├── target_other.cmake
 │   └── target_test.cmake
 ├── CMakeLists.txt
 ├── googletest-1.12.0
@@ -47,6 +48,8 @@ $ tree -L 2
 ├── src
 │   ├── cal.cpp
 │   └── cal.h
+├── other
+│   └── main.cpp
 └── test
     ├── cal.cpp
     └── main.cpp
@@ -91,18 +94,24 @@ This file mainly processes the target generation in src. By default, the code in
 
 For custom additions: This file usually does not need to be changed.
 
-#### (4) target_test.cmake
+#### (4) target_other.cmake
 
-This file mainly handles the target generation in test and can serve as a sample for constructing other targets.
+This file serves as an example of how to add a new target to the project, specifically an executable module. Related code can be found in this file, `CMakeLists.txt`, `(5) target_test.cmake`, and `install.cmake`.
+
+For custom additions: Modify as needed. When adding new targets, ensure you add relevant entries in `CMakeLists.txt`, this file, `(5) target_test.cmake`, and `install.cmake`.
+
+#### (5) target_test.cmake
+
+This file handles the generation of the `test` target and can serve as a sample for building other targets. Note that if other modules use a `main` entry point, you need to exclude the `main` file in the test module.
 
 For custom additions: This file usually does not need to be changed.
 
-#### (5) install.cmake
+#### (6) install.cmake
 
-This file mainly handles installation issues after building the project. It first installs everything in src by default, then selectively installs the dynamic library and test modules based on options.
+This file handles the installation of the project after it’s built. It installs all contents of `src` by default, and dynamically installs shared libraries and test modules based on options.
 
-For custom additions: For additional targets, refer to the target test code sample for installation.
+For custom additions: For any added targets, follow the example of the `target_other` code to handle installation.
 
-#### (6) Custom File
+#### (7) Custom Files
 
-For an additional target named sample, it needs to first be referenced in CMakeLists.txt similar to target-test to add global information, and then a CMake file named target_sample.cmake should be added in include. Next, dependencies for sample should be added in `cmake/import_third_party.cmake`. Then, handle the build directory and build targets in target_sample.cmake. Finally, add the corresponding installation method in `cmake/install.cmake`.
+Refer to `(4) target_other.cmake`. For any newly added target named `sample`, add global information in `CMakeLists.txt` as done for `target_other`, create a `target_sample.cmake` file in the `cmake` directory, and declare dependencies in `cmake/import_third_party.cmake`. Then, handle the build directory and target creation in `target_sample.cmake`, and add installation instructions in `cmake/install.cmake`.
