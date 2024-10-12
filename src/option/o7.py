@@ -38,6 +38,15 @@ def modular_organization_cmake_gen() -> NoReturn:
         "target_src.cmake"            # target_src.cmake
     )   # ../template/cmake/modular_organization/cmake/target_src.cmake
 
+    target_other_content: str = get_content(
+        os.path.dirname(os.getcwd()), # ..
+        "template",                   # template
+        "cmake",                      # cmake
+        "modular_organization",       # modular_organization
+        "cmake",                      # cmake
+        "target_other.cmake"          # target_other.cmake
+    )   # ../template/cmake/modular_organization/cmake/target_other.cmake
+
     target_test_content: str = get_content(
         os.path.dirname(os.getcwd()), # ..
         "template",                   # template
@@ -84,6 +93,10 @@ def modular_organization_cmake_gen() -> NoReturn:
     # Generate file: cmake/target_src.cmake
     file: str = os.path.join(generate_path, "target_src.cmake")
     write_file(file, target_src_content)
+
+    # Generate file: cmake/target_other.cmake
+    file: str = os.path.join(generate_path, "target_other.cmake")
+    write_file(file, target_other_content)
 
     # Generate file: cmake/target_test.cmake
     file: str = os.path.join(generate_path, "target_test.cmake")
