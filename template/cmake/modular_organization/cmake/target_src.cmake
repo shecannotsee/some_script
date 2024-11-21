@@ -17,8 +17,3 @@ if (build_shared_libs STREQUAL ON)
     set_target_properties(${library_dynamic_name} PROPERTIES OUTPUT_NAME ${project_name})
     target_link_libraries(${library_dynamic_name} PRIVATE ${src_link_dependency})
 endif ()
-
-# Easy to install
-set(include_list
-        ${CMAKE_SOURCE_DIR}/src/cal.h
-)
